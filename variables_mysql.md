@@ -3,6 +3,9 @@
 
 - [mysql-store-strings-in-variables-and-concatenate-them-to-return-them-to-the-term](https://stackoverflow.com/questions/20721261/mysql-store-strings-in-variables-and-concatenate-them-to-return-them-to-the-term)
 
+- [how-to-declare-a-variable-in-mysql](https://stackoverflow.com/questions/11754781/how-to-declare-a-variable-in-mysql)
+> 根據這篇文章， `SET @fname = "sam.zheng"` 跟 `SET @fname := "sam.zheng"` 等效，但是 `:=` 是更通用的寫法。
+
 ```sql
 SET @fname = "sam.zheng";
 
@@ -33,3 +36,4 @@ SET @field_content = CONCAT_WS(";", @id, $phone, @gender);
 
 SELECT * FROM member WHERE multi_content = @field_content;
 ```
+
