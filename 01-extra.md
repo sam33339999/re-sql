@@ -10,10 +10,10 @@ SELECT * FROM tags WHERE seq IN (1,2,3,4,5);
 或是說(2)我要查姓 `鄭` 的會員有幾個 ?
 
 ```sql
-- question1
+-- question1
 SELECT * FROM `member` WHERE `displayname` LIKE '%Sam%';
 SELECT * FROM `member` WHERE `displayname` LIKE '亞欣%';
-- question2
+-- question2
 SELECT COUNT(*) FROM member WHERE `name` LIKE '鄭%';
 ```
 
@@ -38,19 +38,23 @@ SELECT uid FROM `member` WHERE `name` LIKE '亞欣%';
 ---
 
 ### `FROM` 資料從哪裡來 ?
-> 像是剛剛有說明，member 表中的資料，所以資料從 member 這邊來
+> 像是剛剛有說明，member 表中的資料，所以資料從 member 這邊來；又或是從一個暫存資料表來的...
 
 ```sql
 SELECT * FROM member;
+
+SELECT t_m.seq FROM
+	(SELECT seq FROM `member` m WHERE m.displayname LIKE '亞欣%') AS t_m;
 ```
 ---
 
-### `WHERE` 是去把撈出來的資料去做過濾，有 `AND`, `OR`, `>`, `=`, `<` 等等的
+### `WHERE` 是去把撈出來的資料去做過濾，有 連接(`AND`, `OR`), 比較(`>`, `=`, `<`, `LIKE`), 聚合(`IN`, `BETWEEN`) 等等的
 
 ```sql
 SELECT * FROM `member` WHERE `seq` = 1;
-
 SELECT * FROM `member` WHERE `gender` = 'male' AND `name` LIKE '鄭%';
+SELECT * FROM `member` WHERE `uid` IN ('U1235', 'U1236');
+SELECT * FROM `member` WHERE `created_at` BETWEEN '2022-01-01 00:00:00' AND '2022-12-31 23:59:59';
 ```
 ---
 
@@ -70,9 +74,14 @@ LEFT JOIN `tags` t ON mt.tag_seq = t.seq
 WHERE m.name LIKE '亞欣%';
 ```
 
+#### 七種 join
+- inner join
+- left join
+- right join
+- inner join
+- full outer join
 
-
-
+![sql joins](./imgs/SQL_Joins.svg)
 
 
 
